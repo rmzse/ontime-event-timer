@@ -1,0 +1,25 @@
+# Hemligheter — får ALDRIG committas
+.env
+.env.local
+.env.*.local
+
+# Cloudflare credentials (om du använder config-fil-approach senare)
+cloudflared/credentials.json
+cloudflared/*.json
+cloudflared/cert.pem
+
+# Ontime data — kund-data, hör inte hemma i versionshantering
+ontime-data/
+ontime-projects/
+*.ontime
+
+# Operativsystem-skräp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor-skräp
+.vscode/
+.idea/
+*.swp
+*~

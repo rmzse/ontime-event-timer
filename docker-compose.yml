@@ -1,0 +1,40 @@
+# Ontime self-hosted via Cloudflare Tunnel
+#
+# Starta:        docker compose up -d
+# Stoppa:        docker compose down
+# Logga:         docker compose logs -f
+# Uppdatera:     docker compose pull && docker compose up -d
+
+services:
+  ontime:
+    image: getontime/ontime:latest
+    container_name: ontime
+    restart: unless-stopped
+    # Inga portar exponeras till värden — Cloudflare Tunnel når Ontime
+    # via Docker-nätverket. Ingen trafik går utanför servern okrypterad.
+    expose:
+      - "4001"
+    volumes:
+      # Här sparas alla Ontime-projekt, styles och external data.
+      # Mappen ontime-data/ är gitignored.
+      - ./ontime-data:/data
+    environment:
+      - TZ=${TZ:-UTC}
+    networks:
+      - ontime-net
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+    networks:
+      - ontime-net
+    depends_on:
+      - ontime
+
+networks:
+  ontime-net:
+    driver: bridge
