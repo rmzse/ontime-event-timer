@@ -5,19 +5,19 @@
 # Körs på en fräsch Ubuntu 22.04 eller 24.04 VPS (t.ex. Hetzner CX23).
 # Logga in som root, klistra in följande:
 #
-#   curl -fsSL https://raw.githubusercontent.com/DITT-USERNAME/ontime-event-setup/main/setup-ontime.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/rmzse/ontime-event-timer/main/setup-ontime.sh | bash
 #
-# (Byt DITT-USERNAME mot ditt GitHub-användarnamn.)
+
 #
 # Eller manuellt:
-#   wget https://raw.githubusercontent.com/DITT-USERNAME/ontime-event-setup/main/setup-ontime.sh
+#   wget https://raw.githubusercontent.com/rmzse/ontime-event-timer/main/setup-ontime.sh
 #   chmod +x setup-ontime.sh
 #   ./setup-ontime.sh
 
 set -euo pipefail
 
-REPO_URL="https://github.com/DITT-USERNAME/ontime-event-setup.git"
-INSTALL_DIR="/opt/ontime-event-setup"
+REPO_URL="https://github.com/rmzse/ontime-event-timer.git"
+INSTALL_DIR="/opt/ontime-event-timer"
 
 echo "==> Uppdaterar paketlistor"
 apt-get update -y
